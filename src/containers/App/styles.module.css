@@ -76,3 +76,40 @@
   border-radius: 8px;
   border: 1px solid #fca5a5;
 }
+
+.personsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.personContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+}
+
+.personImage {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.personName {
+  font-size: 16px;
+  color: #1e293b;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+}
+
+.personNameEn {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}

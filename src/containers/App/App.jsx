@@ -13,37 +13,88 @@ function App() {
   const [showList, setShowList] = useState(true);
 
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(false);
+  const [postsError, setPostsError] = useState(null);
+
+  const [persons, setPersons] = useState([]);
+  const [isLoadingPersons, setIsLoadingPersons] = useState(false);
+  const [personsError, setPersonsError] = useState(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      setIsLoading(true);
-      setError(null);
-
+      setIsLoadingPosts(true);
+      setPostsError(null);
       try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        
+        if (!response.ok) throw new Error(`Ошибка: ${response.status}`);
+        const data = await response.json();
+        setPosts(data.slice(0, 4)); // Берем 4 поста для компактности
+      } catch (err) {
+        setPostsError(err.message);
+      } finally {
+        setIsLoadingPosts(false); 
+      }
+    };
+    fetchPosts();
+  }, []); 
+
+  useEffect(() => {
+    const fetchPersons = async () => {
+      setIsLoadingPersons(true);
+      setPersonsError(null);
+      try {
+        const response = await fetch('https://kinopoiskapiunofficial.tech/api/v1/persons?name=Том', {
+          method: 'GET',
+          headers: {
+            'X-API-KEY': import.meta.env.VITE_KINOPOISK_API_KEY, 
+            'Content-Type': 'application/json',
+          },
+        });
+
         if (!response.ok) {
           throw new Error(`Ошибка при получении данных: статус ${response.status}`);
         }
 
         const data = await response.json();
-        setPosts(data.slice(0, 10)); // Берем только первые 10 постов для компактности
+        setPersons(data.items.slice(0, 8)); // Берем первые 8 результатов
       } catch (err) {
-        setError(err.message);
+        setPersonsError(err.message);
       } finally {
-        setIsLoading(false);
+        setIsLoadingPersons(false);
       }
     };
-
-    fetchPosts();
+    fetchPersons();
   }, []);
 
   return (
     <div className={styles.wrapper}>
       <h1 className="global-title">Моя первая React-структура</h1>
       
+      <section className={styles.section}>
+        <h2>Актеры и режиссеры (API Кинопоиска)</h2>
+        
+        {isLoadingPersons && <p className={styles.loadingMessage}>Ищем в базе...</p>}
+        {personsError && <p className={styles.errorMessage}>Ошибка Кинопоиска: {personsError}</p>}
+        
+        {!isLoadingPersons && !personsError && persons.length > 0 && (
+          <div className={styles.personsGrid}>
+            {persons.map((person) => (
+              <Card key={person.kinopoiskId}>
+                <div className={styles.personContent}>
+                  <img 
+                    src={person.posterUrl} 
+                    alt={person.nameRu || person.nameEn} 
+                    className={styles.personImage} 
+                  />
+                  <h3 className={styles.personName}>{person.nameRu || person.nameEn}</h3>
+                  {person.nameEn && <p className={styles.personNameEn}>{person.nameEn}</p>}
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
+      </section>
+
       <section className={styles.section}>
         <h2>Список пользователей</h2>
         <button 
@@ -68,12 +119,9 @@ function App() {
 
       <section className={styles.section}>
         <h2>Список постов (JSONPlaceholder)</h2>
-        
-        {isLoading && <p className={styles.loadingMessage}>Загрузка постов...</p>}
-        
-        {error && <p className={styles.errorMessage}>Упс! Произошла ошибка: {error}</p>}
-        
-        {!isLoading && !error && posts.length > 0 && (
+        {isLoadingPosts && <p className={styles.loadingMessage}>Загрузка постов...</p>}
+        {postsError && <p className={styles.errorMessage}>Ошибка: {postsError}</p>}
+        {!isLoadingPosts && !postsError && posts.length > 0 && (
           <div className={styles.postsGrid}>
             {posts.map((post) => (
               <Card key={post.id}>
