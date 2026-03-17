@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import UserInfo from '../../components/UserInfo/UserInfo';
+import Input from '../../components/Input/Input';
 import styles from './styles.module.css';
 
 const usersData = [
@@ -12,91 +13,104 @@ const usersData = [
 function App() {
   const [showList, setShowList] = useState(true);
 
-  const [posts, setPosts] = useState([]);
-  const [isLoadingPosts, setIsLoadingPosts] = useState(false);
-  const [postsError, setPostsError] = useState(null);
+  const [films, setFilms] = useState([]);
+  const [isLoadingFilms, setIsLoadingFilms] = useState(false);
+  const [filmsError, setFilmsError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('Матрица');
 
-  const [persons, setPersons] = useState([]);
-  const [isLoadingPersons, setIsLoadingPersons] = useState(false);
-  const [personsError, setPersonsError] = useState(null);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setIsLoadingPosts(true);
-      setPostsError(null);
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        if (!response.ok) throw new Error(`Ошибка: ${response.status}`);
-        const data = await response.json();
-        setPosts(data.slice(0, 4)); // Берем 4 поста для компактности
-      } catch (err) {
-        setPostsError(err.message);
-      } finally {
-        setIsLoadingPosts(false); 
-      }
-    };
-    fetchPosts();
-  }, []); 
+  const [filterQuery, setFilterQuery] = useState('');
 
   useEffect(() => {
-    const fetchPersons = async () => {
-      setIsLoadingPersons(true);
-      setPersonsError(null);
-      try {
-        const response = await fetch('https://kinopoiskapiunofficial.tech/api/v1/persons?name=Том', {
-          method: 'GET',
-          headers: {
-            'X-API-KEY': import.meta.env.VITE_KINOPOISK_API_KEY, 
-            'Content-Type': 'application/json',
-          },
-        });
+    if (!searchQuery.trim()) {
+      setFilms([]);
+      return;
+    }
 
-        if (!response.ok) {
-          throw new Error(`Ошибка при получении данных: статус ${response.status}`);
-        }
+    const delayDebounceFn = setTimeout(async () => {
+      setIsLoadingFilms(true);
+      setFilmsError(null);
+      try {
+        const response = await fetch(
+          `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${searchQuery}`, 
+          {
+            method: 'GET',
+            headers: {
+              'X-API-KEY': import.meta.env.VITE_KINOPOISK_API_KEY, 
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (!response.ok) throw new Error(`Ошибка: статус ${response.status}`);
 
         const data = await response.json();
-        setPersons(data.items.slice(0, 8)); // Берем первые 8 результатов
+        setFilms(data.films ? data.films.slice(0, 8) : []);
       } catch (err) {
-        setPersonsError(err.message);
+        setFilmsError(err.message);
       } finally {
-        setIsLoadingPersons(false);
+        setIsLoadingFilms(false);
       }
-    };
-    fetchPersons();
-  }, []);
+    }, 800);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery]);
+
+  const handleSearchChange = (e) => setSearchQuery(e.target.value);
+
+  const handleFilterChange = (e) => setFilterQuery(e.target.value);
+
+  const filteredUsers = usersData.filter(user => 
+    user.name.toLowerCase().includes(filterQuery.toLowerCase()) || 
+    user.profession.toLowerCase().includes(filterQuery.toLowerCase())
+  );
 
   return (
     <div className={styles.wrapper}>
       <h1 className="global-title">Моя первая React-структура</h1>
-      
+
       <section className={styles.section}>
-        <h2>Актеры и режиссеры (API Кинопоиска)</h2>
+        <h2>Поиск фильмов (API Кинопоиска)</h2>
         
-        {isLoadingPersons && <p className={styles.loadingMessage}>Ищем в базе...</p>}
-        {personsError && <p className={styles.errorMessage}>Ошибка Кинопоиска: {personsError}</p>}
+        <Input 
+          value={searchQuery} 
+          onChange={handleSearchChange} 
+          placeholder="Введите название фильма..." 
+        />
         
-        {!isLoadingPersons && !personsError && persons.length > 0 && (
+        {isLoadingFilms && <p className={styles.loadingMessage}>Ищем фильмы...</p>}
+        {filmsError && <p className={styles.errorMessage}>Ошибка: {filmsError}</p>}
+        
+        {!isLoadingFilms && !filmsError && films.length > 0 && (
           <div className={styles.personsGrid}>
-            {persons.map((person) => (
-              <Card key={person.kinopoiskId}>
+            {films.map((film) => (
+              <Card key={film.filmId}>
                 <div className={styles.personContent}>
                   <img 
-                    src={person.posterUrl} 
-                    alt={person.nameRu || person.nameEn} 
+                    src={film.posterUrlPreview} 
+                    alt={film.nameRu} 
                     className={styles.personImage} 
                   />
-                  <h3 className={styles.personName}>{person.nameRu || person.nameEn}</h3>
-                  {person.nameEn && <p className={styles.personNameEn}>{person.nameEn}</p>}
+                  <h3 className={styles.personName}>{film.nameRu}</h3>
+                  <p className={styles.personNameEn}>{film.year} год</p>
                 </div>
               </Card>
             ))}
           </div>
         )}
+        {!isLoadingFilms && !filmsError && films.length === 0 && searchQuery && (
+           <p>Фильмы не найдены.</p>
+        )}
       </section>
 
       <section className={styles.section}>
-        <h2>Список пользователей</h2>
+        <h2>Список пользователей (Локальный фильтр)</h2>
+        
+        <Input 
+          value={filterQuery} 
+          onChange={handleFilterChange} 
+          placeholder="Фильтр по имени или профессии..." 
+        />
+
         <button 
           className={styles.toggleBtn} 
           onClick={() => setShowList(prev => !prev)}
@@ -106,35 +120,20 @@ function App() {
 
         <div className={styles.usersContainer}>
           {showList ? (
-            usersData.map((user) => (
-              <Card key={user.id}>
-                <UserInfo name={user.name} profession={user.profession} />
-              </Card>
-            ))
+            filteredUsers.length > 0 ? (
+              filteredUsers.map((user) => (
+                <Card key={user.id}>
+                  <UserInfo name={user.name} profession={user.profession} />
+                </Card>
+              ))
+            ) : (
+              <p>Пользователи не найдены.</p>
+            )
           ) : (
             <p>Список скрыт. Нажмите кнопку, чтобы отобразить элементы.</p>
           )}
         </div>
       </section>
-
-      <section className={styles.section}>
-        <h2>Список постов (JSONPlaceholder)</h2>
-        {isLoadingPosts && <p className={styles.loadingMessage}>Загрузка постов...</p>}
-        {postsError && <p className={styles.errorMessage}>Ошибка: {postsError}</p>}
-        {!isLoadingPosts && !postsError && posts.length > 0 && (
-          <div className={styles.postsGrid}>
-            {posts.map((post) => (
-              <Card key={post.id}>
-                <div className={styles.postContent}>
-                  <h3 className={styles.postTitle}>{post.title}</h3>
-                  <p className={styles.postBody}>{post.body}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        )}
-      </section>
-
     </div>
   );
 }
