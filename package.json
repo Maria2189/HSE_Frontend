@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://maria2189.github.io/HSE_Frontend",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
