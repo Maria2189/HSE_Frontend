@@ -5,6 +5,7 @@ import Users from './containers/Pages/Users/Users'
 import Posts from './containers/Pages/Posts/Posts'
 import Profile from './containers/Pages/Profile/Profile'
 import Favorites from './containers/Pages/Favorites/Favorites'
+import MovieDetail from './containers/Pages/MovieDetail/MovieDetail'
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Movies,
+      },
+      {
+        path: 'film/:id',
+        Component: MovieDetail,
       },
       {
         path: 'users',

@@ -65,6 +65,19 @@ export const theme = createTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          fontFamily: "'Raleway', sans-serif",
+          background: 'rgba(18,33,48,0.8)',
+          borderRadius: '8px',
+          '& fieldset': { borderColor: '#1e3a50' },
+          '&:hover fieldset': { borderColor: '#3d8fa6 !important' },
+          '&.Mui-focused fieldset': { borderColor: '#c4894a !important', borderWidth: '1px' },
+        },
+        input: { color: '#e8d4b8', '&::placeholder': { color: '#4a6a7c', opacity: 1 } },
+      },
+    },
     MuiBadge: {
       styleOverrides: {
         badge: { background: '#c4894a', color: '#0c1920', fontWeight: 700, fontSize: '0.65rem' },
