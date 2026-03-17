@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import styles from './styles.module.css'; 
+import { useState } from 'react'
+import styles from './styles.module.css'
 
 function UserInfo({ name, profession }) {
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState(0)
 
   const handleLikeClick = () => {
-    setLikes((prevLikes) => prevLikes + 1);
-  };
+    setLikes((prevLikes) => prevLikes + 1)
+  }
 
   return (
     <div className={styles.card}>
@@ -16,7 +16,7 @@ function UserInfo({ name, profession }) {
         Лайки: {likes}
       </button>
     </div>
-  );
+  )
 }
 
-export default UserInfo;
+export default UserInfo

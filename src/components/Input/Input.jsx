@@ -1,6 +1,6 @@
-import { TextField } from '@mui/material';
+import { TextField } from '@mui/material'
 
-function Input({ value, onChange, placeholder, type = "text" }) {
+function Input({ value, onChange, placeholder, type = 'text' }) {
   return (
     <TextField
       variant="outlined"
@@ -11,7 +11,7 @@ function Input({ value, onChange, placeholder, type = "text" }) {
       size="small"
       fullWidth
     />
-  );
+  )
 }
 
-export default Input;
+export default Input

@@ -1,14 +1,14 @@
-import { useSelector } from 'react-redux';
-import styles from '../Movies/styles.module.css';
-import MovieCard from '../../../components/MovieCard/MovieCard';
+import { useSelector } from 'react-redux'
+import styles from '../Movies/styles.module.css'
+import MovieCard from '../../../components/MovieCard/MovieCard'
 
 const Favorites = () => {
-  const favorites = useSelector((state) => state.favorites);
+  const favorites = useSelector((state) => state.favorites)
 
   return (
     <section className={styles.section}>
       <h2>Ваши избранные фильмы</h2>
-      
+
       {favorites.length === 0 ? (
         <p>В вашем списке пока нет избранных фильмов.</p>
       ) : (
@@ -19,7 +19,7 @@ const Favorites = () => {
         </div>
       )}
     </section>
-  );
-};
+  )
+}
 
-export default Favorites;
+export default Favorites

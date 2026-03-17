@@ -1,27 +1,27 @@
 // src/containers/Pages/Profile/Profile.jsx
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUserName } from '../../../store/userSlice';
-import styles from './styles.module.css';
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUserName } from '../../../store/userSlice'
+import styles from './styles.module.css'
 
 const Profile = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [isSaved, setIsSaved] = useState(false); // Состояние для показа уведомления
-  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState('')
+  const [isSaved, setIsSaved] = useState(false) // Состояние для показа уведомления
+  const dispatch = useDispatch()
 
   // Получаем текущее имя из стора, чтобы показать его в профиле
-  const currentName = useSelector((state) => state.user.name);
+  const currentName = useSelector((state) => state.user.name)
 
   const handleSave = () => {
-    if (inputValue.trim() === '') return; // Защита от сохранения пустой строки
+    if (inputValue.trim() === '') return // Защита от сохранения пустой строки
 
-    dispatch(setUserName(inputValue));
-    setInputValue('');
+    dispatch(setUserName(inputValue))
+    setInputValue('')
 
     // Показываем сообщение об успехе на 3 секунды
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 3000);
-  };
+    setIsSaved(true)
+    setTimeout(() => setIsSaved(false), 3000)
+  }
 
   return (
     <div className={styles.container}>
@@ -52,7 +52,7 @@ const Profile = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

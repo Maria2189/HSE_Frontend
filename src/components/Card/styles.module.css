@@ -5,7 +5,9 @@
   padding: 24px;
   margin-bottom: 20px;
   border: 1px solid #eaeaea;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card:hover {

@@ -1,5 +1,5 @@
-import { fn } from '@storybook/test';
-import Input from './Input';
+import { fn } from '@storybook/test'
+import Input from './Input'
 
 export default {
   title: 'UI-Kit/Input',
@@ -7,7 +7,7 @@ export default {
   args: {
     onChange: fn(),
   },
-};
+}
 
 export const Default = {
   args: {
@@ -15,7 +15,7 @@ export const Default = {
     type: 'text',
     value: '',
   },
-};
+}
 
 export const Password = {
   args: {
@@ -23,4 +23,4 @@ export const Password = {
     type: 'password',
     value: '12345',
   },
-};
+}

@@ -1,24 +1,21 @@
-import { useState } from 'react';
-import Card from '../../../components/Card/Card';
-import UserInfo from '../../../components/UserInfo/UserInfo';
-import styles from './styles.module.css';
+import { useState } from 'react'
+import Card from '../../../components/Card/Card'
+import UserInfo from '../../../components/UserInfo/UserInfo'
+import styles from './styles.module.css'
 
 const usersData = [
-  { id: 1, name: "Антон Сергеенков", profession: "Старший фронтенд-разработчик" },
-  { id: 2, name: "Мария", profession: "Студент" },
-  { id: 3, name: "Иван", profession: "Дизайнер" }
-];
+  { id: 1, name: 'Антон Сергеенков', profession: 'Старший фронтенд-разработчик' },
+  { id: 2, name: 'Мария', profession: 'Студент' },
+  { id: 3, name: 'Иван', profession: 'Дизайнер' },
+]
 
 const Users = () => {
-  const [showList, setShowList] = useState(true);
+  const [showList, setShowList] = useState(true)
 
   return (
     <section className={styles.section}>
       <h2>Список пользователей</h2>
-      <button 
-        className={styles.toggleBtn} 
-        onClick={() => setShowList(prev => !prev)}
-      >
+      <button className={styles.toggleBtn} onClick={() => setShowList((prev) => !prev)}>
         {showList ? 'Скрыть список' : 'Показать список'}
       </button>
 
@@ -34,7 +31,7 @@ const Users = () => {
         )}
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Users;
+export default Users
