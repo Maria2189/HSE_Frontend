@@ -1,3 +1,4 @@
+/* --- Page shell --- */
 .section {
   animation: fadeUp 0.4s ease both;
 }
@@ -7,8 +8,14 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* --- Header row --- */
 .pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
   margin-bottom: 32px;
+  flex-wrap: wrap;
 }
 
 .pageTitle {
@@ -27,55 +34,388 @@
   margin: 0;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
+/* --- Tabs --- */
+.tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+  align-self: flex-start;
 }
 
-.postContent {
+.tab {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: var(--cream-dim);
+  background: var(--surface-2);
+}
+
+.tabActive {
+  color: var(--cream);
+  background: var(--surface-2);
+  border: 1px solid var(--border-light) !important;
+}
+
+/* --- Hero card --- */
+.heroCard {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  margin-bottom: 20px;
+}
+
+.heroCard:hover {
+  border-color: var(--teal-dim);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 700px) {
+  .heroCard { grid-template-columns: 1fr; }
+}
+
+.heroPoster {
+  position: relative;
+  overflow: hidden;
+}
+
+.heroPosterImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+  min-height: 320px;
+}
+
+.heroCard:hover .heroPosterImg { transform: scale(1.04); }
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 60%, var(--surface));
+}
+
+.heroRating {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+.heroBody {
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
 }
 
-.postIndex {
-  font-size: 0.65rem;
+.heroTag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.heroTitle {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
   font-weight: 600;
+  color: var(--cream);
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+}
+
+.heroOrig {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+}
+
+.heroMeta {
+  display: flex;
+  gap: 14px;
+  font-size: 0.72rem;
+  color: var(--teal-light);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.heroDesc {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--cream-dim);
+  margin: 0;
+}
+
+.readMore {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  margin-top: 4px;
+  transition: color 0.2s;
+}
+
+.heroCard:hover .readMore { color: var(--cream); }
+
+/* --- Film post grid --- */
+.filmGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.filmPost {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  padding-right: 16px;
+}
+
+.filmPost:hover {
+  border-color: var(--teal-dim);
+  transform: translateY(-2px);
+}
+
+.filmPostPoster {
+  position: relative;
+  aspect-ratio: 2/3;
+  background: var(--surface-2);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.filmPostImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s;
+}
+
+.filmPost:hover .filmPostImg { transform: scale(1.06); }
+
+.filmPostRating {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.filmPostBody {
+  padding: 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filmPostNum {
+  font-size: 0.6rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--teal-light);
 }
 
-.postTitle {
+.filmPostTitle {
   font-family: 'Raleway', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--cream);
   margin: 0;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
-  text-transform: capitalize;
+  line-height: 1.35;
 }
 
-.postBody {
-  font-size: 0.82rem;
+.filmPostMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.68rem;
   color: var(--muted);
-  line-height: 1.65;
-  margin: 0;
+  align-items: center;
 }
 
-.loadingMessage {
+.filmPostGenre {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1px 8px;
   color: var(--teal-light);
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  animation: pulse 1.4s ease-in-out infinite;
+  font-size: 0.62rem;
+  font-weight: 500;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 1; }
+.filmPostDesc {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- Actors grid --- */
+.actorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.actorCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.actorCard:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+}
+
+.actorPhoto {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.actorImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.actorNoPhoto {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface-2);
+}
+
+.actorInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.actorName {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actorNameEn {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actorRole {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber);
+  background: rgba(196, 137, 74, 0.1);
+  border: 1px solid rgba(196, 137, 74, 0.25);
+  border-radius: 20px;
+  padding: 2px 9px;
+}
+
+.actorDesc {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 6px 0 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- States --- */
+.skeletonWrap { display: flex; flex-direction: column; gap: 14px; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 0%, var(--border) 50%, var(--surface-2) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  display: block;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .errorMessage {
@@ -85,4 +425,12 @@
   padding: 14px 18px;
   border-radius: var(--radius-sm);
   font-size: 0.85rem;
+}
+
+.emptyMessage {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+  padding: 48px 0;
 }
