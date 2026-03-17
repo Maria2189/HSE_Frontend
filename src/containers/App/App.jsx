@@ -12,51 +12,81 @@ const usersData = [
 function App() {
   const [showList, setShowList] = useState(true);
 
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log('Компонент App смонтирован (Монтирование)');
-    
-    return () => {
-      console.log('Компонент App удален (Размонтирование)');
+    const fetchPosts = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        
+        if (!response.ok) {
+          throw new Error(`Ошибка при получении данных: статус ${response.status}`);
+        }
+
+        const data = await response.json();
+        setPosts(data.slice(0, 10)); // Берем только первые 10 постов для компактности
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
-  }, []); 
 
-
-  useEffect(() => {
-    console.log(`Компонент App обновлен. Статус showList: ${showList}`);
-  }, [showList]);
-
+    fetchPosts();
+  }, []);
 
   return (
     <div className={styles.wrapper}>
       <h1 className="global-title">Моя первая React-структура</h1>
       
-      <img 
-        src="https://placehold.co/100x100/3b82f6/white?text=Img" 
-        alt="Тестовое изображение" 
-        style={{ marginBottom: '10px', borderRadius: '8px' }}
-      />
+      <section className={styles.section}>
+        <h2>Список пользователей</h2>
+        <button 
+          className={styles.toggleBtn} 
+          onClick={() => setShowList(prev => !prev)}
+        >
+          {showList ? 'Скрыть список' : 'Показать список'}
+        </button>
 
-      <div className={styles.bgImage}></div>
+        <div className={styles.usersContainer}>
+          {showList ? (
+            usersData.map((user) => (
+              <Card key={user.id}>
+                <UserInfo name={user.name} profession={user.profession} />
+              </Card>
+            ))
+          ) : (
+            <p>Список скрыт. Нажмите кнопку, чтобы отобразить элементы.</p>
+          )}
+        </div>
+      </section>
 
-      <button 
-        className={styles.toggleBtn} 
-        onClick={() => setShowList(prev => !prev)}
-      >
-        {showList ? 'Скрыть список' : 'Показать список'}
-      </button>
-
-      <div>
-        {showList ? (
-          usersData.map((user) => (
-            <Card key={user.id}>
-              <UserInfo name={user.name} profession={user.profession} />
-            </Card>
-          ))
-        ) : (
-          <p>Список скрыт. Нажмите кнопку, чтобы отобразить элементы.</p>
+      <section className={styles.section}>
+        <h2>Список постов (JSONPlaceholder)</h2>
+        
+        {isLoading && <p className={styles.loadingMessage}>Загрузка постов...</p>}
+        
+        {error && <p className={styles.errorMessage}>Упс! Произошла ошибка: {error}</p>}
+        
+        {!isLoading && !error && posts.length > 0 && (
+          <div className={styles.postsGrid}>
+            {posts.map((post) => (
+              <Card key={post.id}>
+                <div className={styles.postContent}>
+                  <h3 className={styles.postTitle}>{post.title}</h3>
+                  <p className={styles.postBody}>{post.body}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
         )}
-      </div>
+      </section>
+
     </div>
   );
 }
