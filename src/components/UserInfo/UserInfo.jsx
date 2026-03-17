@@ -9,10 +9,12 @@ function UserInfo({ name, profession }) {
   };
 
   return (
-    <div className={styles.info}>
-      <h2>{name}</h2>
-      <p>Профессия: {profession}</p>
-      <button onClick={handleLikeClick}>Лайки: {likes}</button>
+    <div className={styles.card}>
+      <h2 className={styles.name}>{name}</h2>
+      <p className={styles.profession}>Профессия: {profession}</p>
+      <button className={styles.likeBtn} onClick={handleLikeClick}>
+        Лайки: {likes}
+      </button>
     </div>
   );
 }
