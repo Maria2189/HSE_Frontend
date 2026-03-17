@@ -1,4 +1,3 @@
-// src/containers/Pages/Profile/Profile.jsx
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserName } from '../../../store/userSlice'
@@ -6,40 +5,45 @@ import styles from './styles.module.css'
 
 const Profile = () => {
   const [inputValue, setInputValue] = useState('')
-  const [isSaved, setIsSaved] = useState(false) // Состояние для показа уведомления
+  const [isSaved, setIsSaved] = useState(false)
   const dispatch = useDispatch()
-
-  // Получаем текущее имя из стора, чтобы показать его в профиле
   const currentName = useSelector((state) => state.user.name)
 
   const handleSave = () => {
-    if (inputValue.trim() === '') return // Защита от сохранения пустой строки
-
+    if (inputValue.trim() === '') return
     dispatch(setUserName(inputValue))
     setInputValue('')
-
-    // Показываем сообщение об успехе на 3 секунды
     setIsSaved(true)
     setTimeout(() => setIsSaved(false), 3000)
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') handleSave()
+  }
+
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Профиль</h1>
+    <div className={styles.section}>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>Профиль</h1>
+        <p className={styles.pageSubtitle}>Настройте своё отображаемое имя</p>
+      </div>
 
       {currentName && (
-        <p style={{ marginBottom: '20px' }}>
-          Текущее имя в системе: <strong>{currentName}</strong>
-        </p>
+        <div className={styles.currentName}>
+          <span>Текущее имя:</span>
+          <strong>{currentName}</strong>
+        </div>
       )}
 
+      <label className={styles.label}>Имя пользователя</label>
       <div className={styles.form}>
         <input
           type="text"
           className={styles.input}
-          placeholder="Введите ваше имя"
+          placeholder="Введите ваше имя..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <button className={styles.button} onClick={handleSave}>
           Сохранить
@@ -48,7 +52,7 @@ const Profile = () => {
 
       {isSaved && (
         <div className={styles.successMessage}>
-          Имя успешно сохранено! Обратите внимание на шапку сайта.
+          ✓ Имя сохранено — загляните в шапку сайта
         </div>
       )}
     </div>

@@ -1,38 +1,49 @@
 .card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 4px;
 }
 
 .name {
-  margin: 0 0 8px 0;
-  font-size: 1.4rem;
-  color: #1a202c;
+  margin: 0 0 2px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
   font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.02em;
 }
 
 .profession {
-  margin: 0 0 16px 0;
-  color: #718096;
-  font-size: 1rem;
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
 }
 
 .likeBtn {
-  background-color: #3b82f6;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--cream-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 7px 14px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.78rem;
   font-weight: 500;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  align-self: flex-start;
 }
 
 .likeBtn:hover {
-  background-color: #2563eb;
+  border-color: var(--amber-dim);
+  color: var(--amber-light);
+  background: rgba(196, 137, 74, 0.08);
 }
 
 .likeBtn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }

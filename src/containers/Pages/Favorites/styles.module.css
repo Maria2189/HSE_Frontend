@@ -1,29 +1,56 @@
-.container {
-  padding: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+.section {
+  animation: fadeUp 0.4s ease both;
 }
 
-.title {
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #333;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 10px;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.emptyMessage {
+.pageHeader {
+  margin-bottom: 32px;
+}
+
+.pageTitle {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.06em;
+  margin: 0 0 6px;
+}
+
+.pageSubtitle {
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.emptyState {
   text-align: center;
-  font-size: 18px;
-  color: #777;
-  margin-top: 50px;
-  padding: 40px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  padding: 80px 24px;
 }
 
-.moviesGrid {
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.25;
+}
+
+.emptyText {
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+}
+
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
 }

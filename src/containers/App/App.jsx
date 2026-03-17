@@ -4,14 +4,14 @@ import styles from './styles.module.css'
 
 function App() {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.layout}>
       <Header />
-
-      <h1 className="global-title">Моя первая React-структура</h1>
-
-      <Outlet />
+      <main className={styles.main}>
+        <Outlet />
+      </main>
     </div>
   )
 }
 
 export default App
+

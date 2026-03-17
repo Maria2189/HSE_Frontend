@@ -55,29 +55,29 @@ const Movies = () => {
 
   return (
     <section className={styles.section}>
-      <h2>Поиск и фильтры (API Кинопоиска)</h2>
+      <div className={styles.pageHeader}>
+        <h2 className={styles.pageTitle}>Поиск фильмов</h2>
+        <p className={styles.pageSubtitle}>База Кинопоиска · введите название или жанр</p>
+      </div>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div className={styles.searchRow}>
         <Input
           value={searchQuery}
           onChange={handleSearchChange}
-          placeholder="Поиск по названию (например, Матрица)..."
+          placeholder="Название фильма..."
         />
-      </div>
-
-      <div style={{ marginBottom: '20px' }}>
         <Input
           value={genreFilter}
           onChange={handleFilterChange}
-          placeholder="Фильтр по жанру (например, боевик)..."
+          placeholder="Жанр (например: боевик)..."
         />
       </div>
 
-      {isLoadingFilms && <p className={styles.loadingMessage}>Ищем в базе...</p>}
-      {filmsError && <p className={styles.errorMessage}>Ошибка Кинопоиска: {filmsError}</p>}
+      {isLoadingFilms && <p className={styles.loadingMessage}>Поиск...</p>}
+      {filmsError && <p className={styles.errorMessage}>Ошибка: {filmsError}</p>}
 
       {!isLoadingFilms && !filmsError && filteredFilms.length > 0 && (
-        <div className={styles.personsGrid}>
+        <div className={styles.grid}>
           {filteredFilms.map((film) => (
             <MovieCard key={film.filmId} film={film} />
           ))}
@@ -85,10 +85,10 @@ const Movies = () => {
       )}
 
       {!isLoadingFilms && !filmsError && films.length > 0 && filteredFilms.length === 0 && (
-        <p>Среди найденных фильмов нет жанра «{genreFilter}».</p>
+        <p className={styles.emptyMessage}>Нет фильмов жанра «{genreFilter}» в результатах.</p>
       )}
       {!isLoadingFilms && !filmsError && films.length === 0 && searchQuery && (
-        <p>Фильмы по запросу «{searchQuery}» не найдены.</p>
+        <p className={styles.emptyMessage}>По запросу «{searchQuery}» ничего не найдено.</p>
       )}
     </section>
   )

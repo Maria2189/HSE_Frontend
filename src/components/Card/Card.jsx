@@ -1,11 +1,7 @@
-import { Card as MuiCard, CardContent } from '@mui/material'
+import styles from './styles.module.css'
 
 function Card({ children }) {
-  return (
-    <MuiCard sx={{ minWidth: 275, mb: 2, boxShadow: 3, borderRadius: 2 }}>
-      <CardContent>{children}</CardContent>
-    </MuiCard>
-  )
+  return <div className={styles.card}>{children}</div>
 }
 
 export default Card

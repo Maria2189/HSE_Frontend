@@ -1,0 +1,100 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--teal-dim);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+.posterWrap {
+  position: relative;
+  aspect-ratio: 2/3;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .poster {
+  transform: scale(1.04);
+}
+
+.favBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  background: rgba(12, 25, 32, 0.75);
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  color: var(--cream-dim);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.favBtn:hover {
+  background: rgba(196, 137, 74, 0.2);
+  border-color: var(--amber);
+  color: var(--amber-light);
+}
+
+.favActive {
+  color: var(--amber);
+  border-color: var(--amber);
+  background: rgba(196, 137, 74, 0.15);
+}
+
+.info {
+  padding: 14px 14px 16px;
+}
+
+.title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--cream);
+  margin: 0 0 4px;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.year {
+  font-size: 0.75rem;
+  color: var(--teal-light);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.genres {
+  margin: 6px 0 0;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

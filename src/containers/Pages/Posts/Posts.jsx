@@ -15,7 +15,7 @@ const Posts = () => {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts')
         if (!response.ok) throw new Error(`Ошибка: ${response.status}`)
         const data = await response.json()
-        setPosts(data.slice(0, 4)) // Берем 4 поста для компактности
+        setPosts(data.slice(0, 4))
       } catch (err) {
         setPostsError(err.message)
       } finally {
@@ -27,14 +27,20 @@ const Posts = () => {
 
   return (
     <section className={styles.section}>
-      <h2>Список постов (JSONPlaceholder)</h2>
-      {isLoadingPosts && <p className={styles.loadingMessage}>Загрузка постов...</p>}
+      <div className={styles.pageHeader}>
+        <h2 className={styles.pageTitle}>Посты</h2>
+        <p className={styles.pageSubtitle}>JSONPlaceholder · демо-данные</p>
+      </div>
+
+      {isLoadingPosts && <p className={styles.loadingMessage}>Загрузка...</p>}
       {postsError && <p className={styles.errorMessage}>Ошибка: {postsError}</p>}
+
       {!isLoadingPosts && !postsError && posts.length > 0 && (
-        <div className={styles.postsGrid}>
-          {posts.map((post) => (
+        <div className={styles.grid}>
+          {posts.map((post, i) => (
             <Card key={post.id}>
               <div className={styles.postContent}>
+                <span className={styles.postIndex}>#{String(i + 1).padStart(2, '0')}</span>
                 <h3 className={styles.postTitle}>{post.title}</h3>
                 <p className={styles.postBody}>{post.body}</p>
               </div>

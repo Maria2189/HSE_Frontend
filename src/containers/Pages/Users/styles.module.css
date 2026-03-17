@@ -1,29 +1,61 @@
 .section {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  animation: fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pageHeader {
+  margin-bottom: 32px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pageTitle {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.06em;
+  margin: 0;
 }
 
 .toggleBtn {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  background: transparent;
+  border: 1px solid var(--teal-dim);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
   cursor: pointer;
-  font-size: 16px;
-  margin-bottom: 15px;
-  transition: background-color 0.3s;
+  transition: all 0.2s ease;
 }
 
 .toggleBtn:hover {
-  background-color: #2563eb;
+  background: rgba(61, 143, 166, 0.1);
+  border-color: var(--teal);
+  color: var(--cream);
 }
 
-.usersContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.hiddenMessage {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 40px 0;
+  text-align: center;
 }

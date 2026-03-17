@@ -14,22 +14,24 @@ const Users = () => {
 
   return (
     <section className={styles.section}>
-      <h2>Список пользователей</h2>
-      <button className={styles.toggleBtn} onClick={() => setShowList((prev) => !prev)}>
-        {showList ? 'Скрыть список' : 'Показать список'}
-      </button>
+      <div className={styles.pageHeader}>
+        <h2 className={styles.pageTitle}>Пользователи</h2>
+        <button className={styles.toggleBtn} onClick={() => setShowList((prev) => !prev)}>
+          {showList ? 'Скрыть список' : 'Показать список'}
+        </button>
+      </div>
 
-      <div className={styles.usersContainer}>
-        {showList ? (
-          usersData.map((user) => (
+      {showList ? (
+        <div className={styles.grid}>
+          {usersData.map((user) => (
             <Card key={user.id}>
               <UserInfo name={user.name} profession={user.profession} />
             </Card>
-          ))
-        ) : (
-          <p>Список скрыт. Нажмите кнопку, чтобы отобразить элементы.</p>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className={styles.hiddenMessage}>Список скрыт — нажмите кнопку, чтобы отобразить.</p>
+      )}
     </section>
   )
 }
