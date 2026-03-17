@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { AppBar, Toolbar, Button, Badge, Typography, Box } from '@mui/material'
 
 import MovieIcon from '@mui/icons-material/Movie'
-import GroupIcon from '@mui/icons-material/Group'
 import ArticleIcon from '@mui/icons-material/Article'
 import PersonIcon from '@mui/icons-material/Person'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -22,7 +21,6 @@ const Header = () => {
   return (
     <AppBar position="sticky" elevation={0}>
       <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, md: 4 }, minHeight: '64px' }}>
-        {/* Logo */}
         <Typography
           variant="h6"
           sx={{
@@ -38,23 +36,18 @@ const Header = () => {
           CINE<span style={{ color: '#c4894a' }}>SEARCH</span>
         </Typography>
 
-        {/* Nav links */}
         <Box sx={{ display: 'flex', gap: 0.5, flexGrow: 1 }}>
           <Button component={NavLink} to="/" style={navLinkStyle} startIcon={<MovieIcon sx={{ fontSize: 16 }} />}>
             Фильмы
           </Button>
-          <Button component={NavLink} to="/users" style={navLinkStyle} startIcon={<GroupIcon sx={{ fontSize: 16 }} />}>
-            Пользователи
-          </Button>
           <Button component={NavLink} to="/posts" style={navLinkStyle} startIcon={<ArticleIcon sx={{ fontSize: 16 }} />}>
-            Посты
+            Редакция
           </Button>
           <Button component={NavLink} to="/profile" style={navLinkStyle} startIcon={<PersonIcon sx={{ fontSize: 16 }} />}>
             Профиль
           </Button>
         </Box>
 
-        {/* Right side */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexShrink: 0 }}>
           <Button
             component={NavLink}
