@@ -1,0 +1,29 @@
+.section {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.toggleBtn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s;
+}
+
+.toggleBtn:hover {
+  background-color: #2563eb;
+}
+
+.usersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

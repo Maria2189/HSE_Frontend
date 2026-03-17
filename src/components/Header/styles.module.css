@@ -1,0 +1,9 @@
+.header { padding: 20px; background: #fff; border-bottom: 1px solid #ccc; margin-bottom: 20px; }
+.nav { display: flex; gap: 20px; }
+.link { text-decoration: none; color: #1e293b; font-weight: bold; padding: 5px 10px; border-radius: 4px; }
+
+.active { color: white; background-color: #3b82f6; }
+.pending { color: #888; animation: pulse 1s infinite; }
+.transitioning { opacity: 0.5; transition: opacity 0.3s; }
+
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
