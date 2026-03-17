@@ -1,10 +1,12 @@
-import styles from './styles.module.css';
+import { Card as MuiCard, CardContent } from '@mui/material';
 
 function Card({ children }) {
   return (
-    <div className={styles.card}>
-      {children} 
-    </div>
+    <MuiCard sx={{ minWidth: 275, mb: 2, boxShadow: 3, borderRadius: 2 }}>
+      <CardContent>
+        {children}
+      </CardContent>
+    </MuiCard>
   );
 }
 

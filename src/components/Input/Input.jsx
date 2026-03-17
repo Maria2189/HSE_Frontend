@@ -1,13 +1,15 @@
-import styles from './styles.module.css';
+import { TextField } from '@mui/material';
 
 function Input({ value, onChange, placeholder, type = "text" }) {
   return (
-    <input
-      className={styles.input}
+    <TextField
+      variant="outlined"
       type={type}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      size="small"
+      fullWidth
     />
   );
 }
