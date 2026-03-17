@@ -1,0 +1,21 @@
+.wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Фоновое изображение через background-image */
+.bgImage {
+  width: 100%;
+  height: 150px;
+  background-image: url('https://placehold.co/600x150/e2e8f0/1e293b?text=Background+Image');
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.toggleBtn {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
