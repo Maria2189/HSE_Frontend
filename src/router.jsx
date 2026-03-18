@@ -6,16 +6,19 @@ import Profile from './containers/Pages/Profile/Profile'
 import Favorites from './containers/Pages/Favorites/Favorites'
 import MovieDetail from './containers/Pages/MovieDetail/MovieDetail'
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    Component: App,
-    children: [
-      { index: true, Component: Movies },
-      { path: 'film/:id', Component: MovieDetail },
-      { path: 'posts', Component: Posts },
-      { path: 'profile', Component: Profile },
-      { path: 'favorites', Component: Favorites },
-    ],
-  },
-])
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      Component: App,
+      children: [
+        { index: true, Component: Movies },
+        { path: 'film/:id', Component: MovieDetail },
+        { path: 'posts', Component: Posts },
+        { path: 'profile', Component: Profile },
+        { path: 'favorites', Component: Favorites },
+      ],
+    },
+  ],
+  { basename: '/HSE_Frontend/' }
+)
