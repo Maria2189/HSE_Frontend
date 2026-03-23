@@ -1,16 +1,49 @@
-# React + Vite
+🚀 HSE Frontend
+Современное веб-приложение, разработанное с использованием React 19 и сборщика Vite. Проект включает в себя настроенную архитектуру с использованием Redux Toolkit для управления состоянием и Material UI для построения пользовательского интерфейса.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌐 Живая демо-версия: Посмотреть проект на GitHub Pages
 
-Currently, two official plugins are available:
+🛠 Стек технологий
+В проекте используются следующие ключевые технологии и библиотеки:
+- Ядро: React ^19.0.0, React DOM
+- Сборщик: Vite ^6.0.0
+- Маршрутизация: React Router ^7.13.1
+- Управление состоянием: Redux Toolkit ^2.11.2, React-Redux
+- UI Компоненты: Material UI (MUI) ^6.4.0 и MUI Icons
+- Стилизация: Emotion (@emotion/react, @emotion/styled)
+- Изолированная разработка UI: Storybook ^8.6.14
+- Линтинг и форматирование: ESLint ^9.39.4 и Prettier
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+📦 Установка и запуск
+Для запуска проекта локально выполните следующие шаги:
 
-## React Compiler
+1. Склонируйте репозиторий:
+git clone <url_вашего_репозитория>
+cd HSE_Frontend
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Установите зависимости:
+npm install
 
-## Expanding the ESLint configuration
+3. Запустите сервер для разработки:
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📜 Доступные скрипты
+В директории проекта вы можете запускать следующие команды:
+
+1. Разработка и сборка
+- npm run dev — запускает приложение в режиме разработки (Vite).
+- npm run build — собирает оптимизированный билд для продакшена в папку dist.
+- npm run preview — локально запускает собранный проект (preview).
+
+2. Storybook (UI Компоненты)
+- npm run storybook — запускает среду Storybook на порту 6006.
+- npm run build-storybook — собирает статическую версию Storybook.
+
+3. Качество кода (Линтер и Форматтер)
+- npm run lint — проверяет код с помощью ESLint.
+- npm run lint:fix — автоматически исправляет найденные ошибки ESLint.
+- npm run format:check — проверяет форматирование файлов с помощью Prettier.
+- npm run format — форматирует все исходные файлы (JS, JSX, CSS, JSON) с помощью Prettier.
+
+4. Деплой
+- npm run deploy — выполняет сборку проекта (predeploy) и публикует приложение на GitHub Pages (gh-pages -d dist).
